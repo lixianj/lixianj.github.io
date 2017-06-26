@@ -24,7 +24,7 @@ url:                "https://lixianj.github.io" # the base hostname & protocol f
 
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:           Asia/Seoul
+timezone:           Asia/Shanghai
 permalink:          /:year-:month-:day/:title/
 
 # Pagination
