@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "SpringBoot环境下如何是修改后的JS，CSS文件生效"
-description: "JS，CSS"
+title: "SpringBoot环境下如何使修改后的JS，CSS文件生效"
+description: "JS,CSS"
 date: 2017-06-29
-tags: [SpringBoot, JS]
+tags: [SpringBoot,JS]
 comments: true
 share: true
 ---
@@ -30,10 +30,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .resourceChain(true) // 生产环境为true，开发环境为false
                 .addResolver(new VersionResourceResolver()
                         .addContentVersionStrategy("/**/*.js", "/**/*.css"));
-	}
+    }
 }
 
-注意点：Service需要重新启动。
+重点是以下两行。
+		.resourceChain(true) // 生产环境为true，开发环境为false
+                .addResolver(new VersionResourceResolver()
+                        .addContentVersionStrategy("/**/*.js", "/**/*.css"));
+注意点：
+Service需要重新启动。
 
 
 2.没有1的配置的情况下,
@@ -41,4 +46,3 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	IE环境，在进入修改的JS或者CSS页面之前，按F12（Debug模式），即可。
 
 ---
-
