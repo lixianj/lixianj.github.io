@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "用MyBatis望SQLS ERVER里批量插入数据，如何避免超过2100 Parameters错误"
+title: "用MyBatis往SQLSERVER里批量插入数据，如何避免超过2100 Parameters错误"
 description: "MyBatis,SqlServer"
 date: 2017-07-05
 tags: [MyBatis,2100 Parameters]
