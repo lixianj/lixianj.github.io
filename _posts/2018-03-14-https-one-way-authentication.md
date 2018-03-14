@@ -2,7 +2,7 @@
 layout: post
 title: one way authentication by one way with pkcs12.pfx file
 description: "Linux, curl, openssl, httpclient4.5"
-date: 2018-03-13
+date: 2018-03-14
 tags: [curl, openssl, httpclient,pkcs12]
 comments: true
 share: true
@@ -10,10 +10,10 @@ share: true
 
 如何在只有pkcs12.pfx证书的情况下，进行单方认证（Server验证client, Client侧不验证Server(因为没有CA证书）)
 
-为了确保Server侧的Service确实能够正常连接，有必要用curl进行check
+#为了确保Server侧的Service确实能够正常连接，有必要用curl进行check
 
 用curl 进行连接前，确保 curl 使用 openssl编译过。
-# curl --version
+[root]# curl --version
 curl 7.29.0 (x86_64-unknown-linux-gnu) libcurl/7.29.0 OpenSSL/1.0.1e zlib/1.2.
 Protocols: dict file ftp ftps gopher http https imap imaps pop3 pop3s rtsp smtp smtps telnet tftp
 Features: IPv6 Largefile NTLM NTLM_WB SSL libz
@@ -29,13 +29,13 @@ Features: IPv6 Largefile NTLM NTLM_WB SSL libz
 
 3. 验证Servcie Server连接
 如果需要代理，执行前先设置代理。
-#export https_proxy=https://web-proxy.your.com:XXXX/
-#curl -k -v --cert "./cert.pem" --key "./keynp.pem" -H "Content-type: application/json" -X POST -d '{"name":"01","Id":"001"}' "https://services.your.com/service/v1/api"
+[root]#export https_proxy=https://web-proxy.your.com:XXXX/
+[root]#curl -k -v --cert "./cert.pem" --key "./keynp.pem" -H "Content-type: application/json" -X POST -d '{"name":"01","Id":"001"}' "https://services.your.com/service/v1/api"
 
 这里 option[-k]就表示client端不验证Server.
 
 
-用HttpClient4.5来实现单方认证连接Server的Service
+#用HttpClient4.5来实现单方认证连接Server的Service
 
 1.
 RequestConfig config = RequestConfig.custom()
@@ -78,7 +78,7 @@ try (CloseableHttpClient httpclient = HttpClientBuilder.create().useSystemProper
 
 }
 
-注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()
-JVM参数
--Djava.net.useSystemProxies=true -Dhttps.proxyHost=web-proxy.your.com -Dhttps.proxyPort=8080
+ 注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()
+ ※JVM参数
+ ※-Djava.net.useSystemProxies=true -Dhttps.proxyHost=web-proxy.your.com -Dhttps.proxyPort=8080
 ---
