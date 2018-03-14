@@ -1,6 +1,6 @@
 ---
 layout: post
-title: one way authentication by one way with pkcs12.pfx file
+title: one way authentication by with pkcs12.pfx file
 description: "Linux, curl, openssl, httpclient4.5"
 date: 2018-03-14
 tags: [curl, openssl, httpclient,pkcs12]
