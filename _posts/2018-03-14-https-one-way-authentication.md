@@ -41,45 +41,45 @@ Features: IPv6 Largefile NTLM NTLM_WB SSL libz
 
 1.  
 RequestConfig config = RequestConfig.custom()  
-              	.setConnectTimeout(this.connTimeout * 1000)  
-		.setSocketTimeout(this.socketTimeout * 1000)  
-		.build();  
+\             	.setConnectTimeout(this.connTimeout * 1000)  
+\		.setSocketTimeout(this.socketTimeout * 1000)  
+\		.build();  
 2.  
-try {  
-	KeyStore keyStore = KeyStore.getInstance("PKCS12");  
-	//PKCS12证书  
-	InputStream instream =This.class.getClassLoader().getResourceAsStream(this.vNextCrtFile);  
-	//从Server端导出PKCS12证书时的password  
-	keyStore.load(instream, this.vNextPassword.toCharArray());  
-  
-	SSLContext sslcontext = SSLContexts.custom()  
-			.loadKeyMaterial(keyStore, this.vNextPassword.toCharArray())  
-			 //忽略Client端对Server的验证。类似 curl命令的[-k]。 
-			 //否则会提示[unable to find valid certification path to requested target]  
-			.loadTrustMaterial(new TrustSelfSignedStrategy())  
-			.build();  
-	sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,  
-				SSLConnectionSocketFactory.getDefaultHostnameVerifier());  
-    } catch (Exception e) {  
-        //TODO  
-    }  
-
+\try {  
+\	KeyStore keyStore = KeyStore.getInstance("PKCS12");  
+\	//PKCS12证书  
+\	InputStream instream =This.class.getClassLoader().getResourceAsStream(this.vNextCrtFile);  
+\	//从Server端导出PKCS12证书时的password  
+\	keyStore.load(instream, this.vNextPassword.toCharArray());  
+\ 
+\	SSLContext sslcontext = SSLContexts.custom()  
+\			.loadKeyMaterial(keyStore, this.vNextPassword.toCharArray())  
+\			 //忽略Client端对Server的验证。类似 curl命令的[-k]。 
+\			 //否则会提示[unable to find valid certification path to requested target]  
+\			.loadTrustMaterial(new TrustSelfSignedStrategy())  
+\			.build();  
+\	sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,  
+\				SSLConnectionSocketFactory.getDefaultHostnameVerifier());  
+\   } catch (Exception e) {  
+\       //TODO  
+\   }  
+\
 3.  
-   try (CloseableHttpClient httpclient = HttpClientBuilder.create().useSystemProperties()  
-				.setDefaultRequestConfig(config)  
-				.setSSLSocketFactory(sslsf).build()) {  
-           HttpPost httpPost = new HttpPost(this.url2VNext);  
-           StringEntity entity = new StringEntity(json);  
-           httpPost.setEntity(entity);  
-           // Create a custom response handler  
-           ResponseHandler<Integer> responseHandler = response -> {  
-                int status = response.getStatusLine().getStatusCode();  
-                return status;  
-           };  
-	statusCode = httpclient.execute(httpPost, responseHandler);  
-   } catch (Exception e) {   
-    //TODO  
-   }   
+\  try (CloseableHttpClient httpclient = HttpClientBuilder.create().useSystemProperties()  
+\				.setDefaultRequestConfig(config)  
+\				.setSSLSocketFactory(sslsf).build()) {  
+\           HttpPost httpPost = new HttpPost(this.url2VNext);  
+\           StringEntity entity = new StringEntity(json);  
+\           httpPost.setEntity(entity);  
+\           // Create a custom response handler  
+\           ResponseHandler<Integer> responseHandler = response -> {  
+\                int status = response.getStatusLine().getStatusCode();  
+\                return status;  
+\           };  
+\	statusCode = httpclient.execute(httpPost, responseHandler);  
+\   } catch (Exception e) {   
+\    //TODO  
+\   }   
 
  注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()  
  ※JVM参数  
