@@ -44,7 +44,7 @@ RequestConfig config = RequestConfig.custom()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setConnectTimeout(this.connTimeout * 1000)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setSocketTimeout(this.socketTimeout * 1000)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();  
-2.<br>  
+2.<br>
 try {  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyStore keyStore = KeyStore.getInstance("PKCS12");  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//PKCS12证书  
@@ -72,7 +72,7 @@ try {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringEntity entity = new StringEntity(json);  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;httpPost.setEntity(entity);  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create a custom response handler  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ResponseHandler<Integer> responseHandler = response -> {   <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ResponseHandler<Integer> responseHandler = response -> {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int status = response.getStatusLine().getStatusCode();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return status;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br>
@@ -81,7 +81,7 @@ try {
 &nbsp;&nbsp;&nbsp;&nbsp;//TODO <br>
 &nbsp;&nbsp;}<br>
 
- 注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()  
- ※JVM参数  
- ※-Djava.net.useSystemProxies=true -Dhttps.proxyHost=web-proxy.your.com -Dhttps.proxyPort=8080  
+ 注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()<br>
+ ※JVM参数<br>
+ ※-Djava.net.useSystemProxies=true -Dhttps.proxyHost=web-proxy.your.com -Dhttps.proxyPort=8080<br>
 ---
