@@ -75,11 +75,11 @@ try {
            ResponseHandler<Integer> responseHandler = response -> {  
                 int status = response.getStatusLine().getStatusCode();  
                 return status;  
-           };
+           };  
 	statusCode = httpclient.execute(httpPost, responseHandler);  
-   } catch (Exception e) {  
-    //TOD  
-   }  
+   } catch (Exception e) {   
+    //TODO  
+   }   
 
  注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()  
  ※JVM参数  
