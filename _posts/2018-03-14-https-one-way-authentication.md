@@ -39,47 +39,47 @@ Features: IPv6 Largefile NTLM NTLM_WB SSL libz
 
 #用HttpClient4.5来实现单方认证连接Server的Service  
 
-1.  
+1.<br>
 RequestConfig config = RequestConfig.custom()  
-\             	.setConnectTimeout(this.connTimeout * 1000)  
-\		.setSocketTimeout(this.socketTimeout * 1000)  
-\		.build();  
-2.  
-\try {  
-\	KeyStore keyStore = KeyStore.getInstance("PKCS12");  
-\	//PKCS12证书  
-\	InputStream instream =This.class.getClassLoader().getResourceAsStream(this.vNextCrtFile);  
-\	//从Server端导出PKCS12证书时的password  
-\	keyStore.load(instream, this.vNextPassword.toCharArray());  
-\ 
-\	SSLContext sslcontext = SSLContexts.custom()  
-\			.loadKeyMaterial(keyStore, this.vNextPassword.toCharArray())  
-\			 //忽略Client端对Server的验证。类似 curl命令的[-k]。 
-\			 //否则会提示[unable to find valid certification path to requested target]  
-\			.loadTrustMaterial(new TrustSelfSignedStrategy())  
-\			.build();  
-\	sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,  
-\				SSLConnectionSocketFactory.getDefaultHostnameVerifier());  
-\   } catch (Exception e) {  
-\       //TODO  
-\   }  
-\
-3.  
-\  try (CloseableHttpClient httpclient = HttpClientBuilder.create().useSystemProperties()  
-\				.setDefaultRequestConfig(config)  
-\				.setSSLSocketFactory(sslsf).build()) {  
-\           HttpPost httpPost = new HttpPost(this.url2VNext);  
-\           StringEntity entity = new StringEntity(json);  
-\           httpPost.setEntity(entity);  
-\           // Create a custom response handler  
-\           ResponseHandler<Integer> responseHandler = response -> {  
-\                int status = response.getStatusLine().getStatusCode();  
-\                return status;  
-\           };  
-\	statusCode = httpclient.execute(httpPost, responseHandler);  
-\   } catch (Exception e) {   
-\    //TODO  
-\   }   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setConnectTimeout(this.connTimeout * 1000)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setSocketTimeout(this.socketTimeout * 1000)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();  
+2.<br>  
+try {  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KeyStore keyStore = KeyStore.getInstance("PKCS12");  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//PKCS12证书  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InputStream instream =This.class.getClassLoader().getResourceAsStream(this.vNextCrtFile);  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//从Server端导出PKCS12证书时的password  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyStore.load(instream, this.vNextPassword.toCharArray());  
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSLContext sslcontext = SSLContexts.custom()  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.loadKeyMaterial(keyStore, this.vNextPassword.toCharArray())  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //忽略Client端对Server的验证。类似 curl命令的[-k]。 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //否则会提示[unable to find valid certification path to requested target]  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.loadTrustMaterial(new TrustSelfSignedStrategy())  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSLConnectionSocketFactory.getDefaultHostnameVerifier());  
+&nbsp;&nbsp;&nbsp;&nbsp;} catch (Exception e) {  
+&nbsp;&nbsp;&nbsp;&nbsp;//TODO  
+&nbsp;&nbsp;&nbsp;&nbsp;}  
+
+3.<br>
+&nbsp;try (CloseableHttpClient httpclient = HttpClientBuilder.create().useSystemProperties()  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRequestConfig(config)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setSSLSocketFactory(sslsf).build()) {  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpPost httpPost = new HttpPost(this.url2VNext);  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringEntity entity = new StringEntity(json);  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;httpPost.setEntity(entity);  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Create a custom response handler  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ResponseHandler<Integer> responseHandler = response -> {  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     int status = response.getStatusLine().getStatusCode();  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     return status;  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statusCode = httpclient.execute(httpPost, responseHandler);  
+&nbsp;&nbsp;} catch (Exception e) {   
+&nbsp;&nbsp;&nbsp;&nbsp;//TODO  
+&nbsp;&nbsp;}   
 
  注意用下面的JVM参数设置代理，需要使用HttpClientBuilder.create().useSystemProperties()  
  ※JVM参数  
