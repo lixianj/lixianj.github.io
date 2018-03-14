@@ -30,7 +30,7 @@ Features: IPv6 Largefile NTLM NTLM_WB SSL libz
 [root]#openssl pkcs12 -in client_certificate.pfx -nocerts -nodes | openssl rsa > client_key.pem  
 
 3. 验证Servcie Server连接  
-如果需要代理，执行前先设置代理。 
+如果需要代理，执行前先设置代理<br>
 [root]#export https_proxy=https://web-proxy.your.com:XXXX/  
 [root]#curl -k -v --cert "./cert.pem" --key "./keynp.pem" -H "Content-type: application/json" -X POST -d '{"name":"01","Id":"001"}' "https://services.your.com/service/v1/api"  
 
